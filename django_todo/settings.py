@@ -33,7 +33,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str('DJANGO_SECRET_KEY', 'fallback-secret-key')  
 DEBUG = env.bool('DJANGO_DEBUG', True)  
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', [])
+ALLOWED_HOSTS = ['amegeddon-django-todo-app.herokuapp.com']
+
 
 
 # Application definition
