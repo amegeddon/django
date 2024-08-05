@@ -17,6 +17,8 @@ import os
 import dj_database_url
 if os.path.isfile('env.py'):
     import env
+    
+development = os.environ.get('DEVELOPMENT', false)    
 
 # Initialize the Env object
 env = Env()
@@ -32,7 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str('DJANGO_SECRET_KEY', 'fallback-secret-key')  
-DEBUG = env.bool('DJANGO_DEBUG', True)  
+DEBUG = development
 ALLOWED_HOSTS = ['amegeddon-django-todo-app-d34a4126aa91.herokuapp.com']
 
 
@@ -83,16 +85,17 @@ WSGI_APPLICATION = 'django_todo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-#DATABASES = {
-    #'default': {
-     #   'ENGINE': 'django.db.backends.sqlite3',
-     #   'NAME': BASE_DIR / 'db.sqlite3',
-    #}
-#}
-
-DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-}
+if development:
+    DATABASES = {
+        'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    }
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
