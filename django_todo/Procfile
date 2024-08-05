@@ -1,1 +1,1 @@
-web: gunicorn amegeddon-django-todo-app.wsgi:application
+web: gunicorn amegeddon_django_todo_app.wsgi:application
